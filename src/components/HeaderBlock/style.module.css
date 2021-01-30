@@ -1,0 +1,11 @@
+.root {
+  background: linear-gradient(to bottom, #181d23 0%, #202736 80%);
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: red;
+}
