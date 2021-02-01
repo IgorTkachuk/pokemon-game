@@ -1,5 +1,4 @@
 import s from "./style.module.css";
-console.log("🚀 ~ file: index.js ~ line 2 ~ s", s);
 
 const HeaderBlock = () => {
   return (

@@ -11,9 +11,6 @@ const Layout = ({ id, title, descr, urlBg, colorBg, children }) => {
       }
     : styleBg;
 
-  console.log(s.desc);
-  console.log(s.full);
-
   return (
     <section style={styleBg} className={s.root} id={id}>
       <div className={s.wrapper}>
