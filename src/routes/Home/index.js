@@ -6,6 +6,7 @@ import bg3 from "../../assets/bg3.jpeg";
 import bg2 from "../../assets/bg2.jpeg";
 
 import PokemonCard from "../../components/PokemonCard";
+import MenuHeader from "../../components/MenuHeader";
 
 const POKEMONS = [
   {
@@ -138,6 +139,7 @@ const HomePage = ({ onChangePage }) => {
 
   return (
     <>
+      <MenuHeader />
       <Header
         title='Header title'
         descr='Header descr'
