@@ -3,7 +3,7 @@ import Menu from "../Menu";
 import NavBar from "../NavBar";
 
 const MenuHeader = () => {
-  const [isMenuActive, setIsMenuActive] = useState(false);
+  const [isMenuActive, setIsMenuActive] = useState(null);
 
   const handleMenuButtonClick = (e) => {
     e.preventDefault();

@@ -7,7 +7,6 @@ const App = () => {
   const [page, setPage] = useState("app");
 
   const handleChangePage = (page) => {
-    console.log("####: <App />");
     setPage(page);
   };
 
@@ -15,7 +14,7 @@ const App = () => {
     case "app":
       return <HomePage onChangePage={handleChangePage} />;
     case "game":
-      return <GamePage />;
+      return <GamePage onChangePage={handleChangePage} />;
     default:
       return <HomePage />;
   }
