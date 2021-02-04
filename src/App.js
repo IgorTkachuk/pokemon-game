@@ -1,4 +1,4 @@
-import { useRouteMatch, Route, Switch } from "react-router-dom";
+import { useRouteMatch, Route, Switch, Redirect } from "react-router-dom";
 import GamePage from "./routes/Game";
 import HomePage from "./routes/Home";
 import MenuHeader from "./components/MenuHeader";
@@ -9,6 +9,7 @@ const App = () => {
 
   return (
     <Switch>
+      <Route path='/404' render={() => <h1> 404 NotFound</h1>} />
       <Route>
         <>
           <MenuHeader />
@@ -17,12 +18,11 @@ const App = () => {
             <Route path='/home' component={HomePage} />
             <Route path='/game' component={GamePage} />
             <Route path='/about' render={() => <h1>This is page About</h1>} />
+            <Route render={() => <Redirect to='/404' />} />
           </Switch>
           <Footer />
         </>
       </Route>
-
-      <Route render={() => <h1> 404 NotFound</h1>} />
     </Switch>
   );
 };
