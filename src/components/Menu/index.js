@@ -21,7 +21,7 @@ const MENU = [
   },
 ];
 
-const Menu = ({ isActive }) => {
+const Menu = ({ isActive, onLinkClick }) => {
   return (
     <div
       className={cn(s.menuContainer, {
@@ -34,7 +34,9 @@ const Menu = ({ isActive }) => {
         <ul>
           {MENU.map(({ title, to }, index) => (
             <li key={index}>
-              <Link to={to}>{title}</Link>
+              <Link to={to} onClick={onLinkClick}>
+                {title}
+              </Link>
             </li>
           ))}
         </ul>
