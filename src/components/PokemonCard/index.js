@@ -2,9 +2,18 @@ import cn from "classnames";
 import s from "./style.module.css";
 import cardBackSide from "./assets/card-back-side.jpeg";
 
-const PokemonCard = ({ name, img, id, type, values, isActive, onClick }) => {
+const PokemonCard = ({
+  rf,
+  name,
+  img,
+  id,
+  type,
+  values,
+  isActive,
+  onClick,
+}) => {
   const handleClick = () => {
-    onClick(id);
+    onClick(rf);
   };
 
   return (
