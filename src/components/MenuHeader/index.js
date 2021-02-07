@@ -6,7 +6,6 @@ const MenuHeader = () => {
   const [isMenuActive, setIsMenuActive] = useState(null);
 
   const handleMenuButtonClick = (e) => {
-    e.preventDefault();
     setIsMenuActive((prevState) => !prevState);
   };
 
@@ -16,7 +15,7 @@ const MenuHeader = () => {
         isMenuButtonActive={isMenuActive}
         onMenuButtonClick={handleMenuButtonClick}
       />
-      <Menu isActive={isMenuActive} />
+      <Menu isActive={isMenuActive} onLinkClick={handleMenuButtonClick} />
     </>
   );
 };

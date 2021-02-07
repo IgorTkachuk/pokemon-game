@@ -1,4 +1,3 @@
-import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 
@@ -6,7 +5,6 @@ import bg3 from "../../assets/bg3.jpeg";
 import bg2 from "../../assets/bg2.jpeg";
 
 import PokemonCard from "../../components/PokemonCard";
-import MenuHeader from "../../components/MenuHeader";
 
 const POKEMONS = [
   {
@@ -133,13 +131,11 @@ const POKEMONS = [
 
 const HomePage = ({ onChangePage }) => {
   const handleClickButton = (page) => {
-    console.log("###: <HomePage />");
     onChangePage && onChangePage(page);
   };
 
   return (
     <>
-      <MenuHeader />
       <Header
         title='Header title'
         descr='Header descr'
@@ -197,7 +193,6 @@ const HomePage = ({ onChangePage }) => {
         descr='Layout last descr with urlBg'
         urlBg={bg2}
       />
-      <Footer />
     </>
   );
 };
