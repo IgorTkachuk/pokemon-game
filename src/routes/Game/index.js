@@ -16,12 +16,16 @@ const GamePage = () => {
   }, []);
 
   const pokemonCardOnClickHandle = (key) => {
-    setPokemons((prevState) => {
-      const newState = { ...prevState };
-      newState[key].active = !prevState[key].active;
-      database.ref("pokemons/" + key).set(newState[key]);
-      return newState;
-    });
+    database
+      .ref("pokemons/" + key)
+      .set({ ...pokemons[key], active: !pokemons[key].active })
+      .then(() => {
+        setPokemons((prevState) => {
+          const newState = { ...prevState };
+          newState[key].active = !prevState[key].active;
+          return newState;
+        });
+      });
   };
 
   const addNewPokemonHandle = () => {
@@ -51,10 +55,8 @@ const GamePage = () => {
     };
 
     const newPokemonRef = database.ref("pokemons").push();
-    newPokemonRef.set(newPokemonObject);
-
-    database.ref("pokemons").once("value", (snapshot) => {
-      setPokemons(snapshot.val());
+    newPokemonRef.set(newPokemonObject).then(() => {
+      setPokemons({ ...pokemons, [newPokemonRef.key]: newPokemonObject });
     });
   };
 
