@@ -11,6 +11,7 @@ const PokemonCard = ({
   values,
   isActive,
   onClick,
+  minimaze,
 }) => {
   const handleClick = () => {
     onClick(rf);
@@ -31,13 +32,15 @@ const PokemonCard = ({
               <div className={s.imgContainer}>
                 <img src={img} alt={name} />
               </div>
-              <div className={s.info}>
-                <span className={s.number}>#{id}</span>
-                <h3 className={s.name}>{name}</h3>
-                <small className={s.type}>
-                  Type: <span>{type}</span>
-                </small>
-              </div>
+              {!minimaze && (
+                <div className={s.info}>
+                  <span className={s.number}>#{id}</span>
+                  <h3 className={s.name}>{name}</h3>
+                  <small className={s.type}>
+                    Type: <span>{type}</span>
+                  </small>
+                </div>
+              )}
             </div>
           </div>
         </div>
