@@ -1,0 +1,9 @@
+.player1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.player2 {
+  display: flex;
+  flex-wrap: wrap;
+}

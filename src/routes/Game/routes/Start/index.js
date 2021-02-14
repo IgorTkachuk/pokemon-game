@@ -4,35 +4,29 @@ import Layout from "../../../../components/Layout";
 import PokemonCard from "../../../../components/PokemonCard";
 import { PokemonContext } from "../../../../context/pokemonContext";
 
-import database from "../../../../service/firebase";
-
 import s from "./style.module.css";
+import { FirebaseContext } from "../../../../context/firebaseContext";
 
 const StartPage = () => {
   const [pokemons, setPokemons] = useState({});
   const pCnxt = useContext(PokemonContext);
+  const firebase = useContext(FirebaseContext);
 
   let history = useHistory();
 
   useEffect(() => {
-    database.ref("pokemons").once("value", (snapshot) => {
-      setPokemons(snapshot.val());
+    firebase.getPokemonSocket((pokemons) => {
+      setPokemons(pokemons);
     });
   }, []);
 
   const pokemonCardOnClickHandle = (key) => {
-    console.log(pCnxt);
     pCnxt.selectPokemonHandle(pokemons[key]);
-    database
-      .ref("pokemons/" + key)
-      .set({ ...pokemons[key], active: !pokemons[key].active })
-      .then(() => {
-        setPokemons((prevState) => {
-          const newState = { ...prevState };
-          newState[key].active = !prevState[key].active;
-          return newState;
-        });
-      });
+
+    firebase.postPokemon(key, {
+      ...pokemons[key],
+      active: !pokemons[key].active,
+    });
   };
 
   const addNewPokemonHandle = () => {
@@ -61,9 +55,8 @@ const StartPage = () => {
       },
     };
 
-    const newPokemonRef = database.ref("pokemons").push();
-    newPokemonRef.set(newPokemonObject).then(() => {
-      setPokemons({ ...pokemons, [newPokemonRef.key]: newPokemonObject });
+    firebase.addPokemon(newPokemonObject, (newKey) => {
+      setPokemons({ ...pokemons, [newKey]: newPokemonObject });
     });
   };
 
@@ -78,17 +71,13 @@ const StartPage = () => {
       title='Layout first title with colorBg'
       descr='Layout first descr with colorBg'
     >
-      {/* <div className={s.btn}>
-        <button onClick={addNewPokemonHandle}>ADD NEW POKEMON</button>
-      </div> */}
-
-      <div className={s.btn}>
+      <div className={s.buttonwrap}>
         <button onClick={startGameHandle}>START GAME</button>
       </div>
 
       <div className={s.flex}>
         {Object.entries(pokemons).map(
-          ([key, { id, name, img, type, values, active }]) => {
+          ([key, { id, name, img, type, values, active, selected }]) => {
             return (
               <PokemonCard
                 key={key}
@@ -99,7 +88,9 @@ const StartPage = () => {
                 type={type}
                 values={values}
                 isActive={active}
+                selected={true}
                 onClick={pokemonCardOnClickHandle}
+                className={s.card}
               />
             );
           }

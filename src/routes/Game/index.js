@@ -106,6 +106,7 @@ import { useState } from "react";
 const GamePage = () => {
   const match = useRouteMatch();
   const [selectedPokemons, setSelectedPokemons] = useState([]);
+  const [gameResult, setGameResult] = useState({});
 
   const selectPokemonHandle = (pokemon) => {
     setSelectedPokemons((prevState) => {
@@ -119,7 +120,14 @@ const GamePage = () => {
   };
 
   return (
-    <PokemonContext.Provider value={{ selectedPokemons, selectPokemonHandle }}>
+    <PokemonContext.Provider
+      value={{
+        selectedPokemons,
+        selectPokemonHandle,
+        gameResult,
+        setGameResult,
+      }}
+    >
       <Switch>
         <Route path={`${match.path}/`} exact component={StartPage} />
         <Route path={`${match.path}/board`} component={BoardPage} />
